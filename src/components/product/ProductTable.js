@@ -13,11 +13,12 @@ import {
   TableRow,
   Typography
 } from '@mui/material';
+import { getInitials } from '../../utils/get-initials';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import NextLink from 'next/link'
 
-export const CustomerListResults = ({ customers, ...rest }) => {
+export const ProductTable = ({ customers, products, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
@@ -73,10 +74,10 @@ export const CustomerListResults = ({ customers, ...rest }) => {
                   ชื่อ
                 </TableCell>
                 <TableCell>
-                  อีเมล
+                  โมเดล
                 </TableCell>
                 <TableCell>
-                  เบอร์โทร
+                  ราคา
                 </TableCell>
                 <TableCell>
                   ปุ่ม
@@ -84,11 +85,11 @@ export const CustomerListResults = ({ customers, ...rest }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {customers.slice(0, limit).map((customer) => (
+              {products.slice(0, limit).map((product) => (
                 <TableRow
                   hover
-                  key={customer.id}
-                  selected={selectedCustomerIds.indexOf(customer.id) !== -1}
+                  key={product.id}
+                  selected={selectedCustomerIds.indexOf(product.id) !== -1}
                 >
                   <TableCell>
                     <Box
@@ -97,29 +98,24 @@ export const CustomerListResults = ({ customers, ...rest }) => {
                         display: 'flex'
                       }}
                     >
-                      {/* <Avatar
-                        src={customer.avatarUrl}
-                        sx={{ mr: 2 }}
-                      >
-                        {getInitials(customer.name)}
-                      </Avatar> */}
+                      {/* {getInitials(product.title)} */}
                       <Typography
                         color="textPrimary"
                         variant="body1"
                       >
-                        {customer.name}
+                        {product.title}
                       </Typography>
                     </Box>
                   </TableCell>
                   <TableCell>
-                    {customer.email}
+                    {product.model}
                   </TableCell>
                   <TableCell>
-                    {customer.phone}
+                    {product.price}
                   </TableCell>
                   <TableCell>
                     <NextLink
-                      href={'/customers/add'}
+                    href={'/products/add'}
                     >
                       <EditIcon className='cursor-pointer'/>
                     </NextLink>
@@ -144,6 +140,6 @@ export const CustomerListResults = ({ customers, ...rest }) => {
   );
 };
 
-CustomerListResults.propTypes = {
-  customers: PropTypes.array.isRequired
+ProductTable.propTypes = {
+  products: PropTypes.array.isRequired
 };

@@ -1,14 +1,14 @@
 import Head from 'next/head';
 import { Box, Container, Typography } from '@mui/material';
 import { DashboardLayout } from '../components/dashboard-layout';
-import { SettingsNotifications } from '../components/settings/settings-notifications';
-import { SettingsPassword } from '../components/settings/settings-password';
+import { TextRemark } from '../components/settings/TextRemark';
+import { Sign } from '../components/settings/Sign';
 
 const Settings = () => (
   <>
     <Head>
       <title>
-        Settings | Material Kit
+        ตั้งค่า
       </title>
     </Head>
     <Box
@@ -23,11 +23,11 @@ const Settings = () => (
           sx={{ mb: 3 }}
           variant="h4"
         >
-          Settings
+          ตั้งค่า
         </Typography>
-        <SettingsNotifications />
+        <Sign />
         <Box sx={{ pt: 3 }}>
-          <SettingsPassword />
+          <TextRemark />
         </Box>
       </Container>
     </Box>

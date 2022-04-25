@@ -15,9 +15,9 @@ import {
 } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
-import NextLink from 'next/link'
+import NextLink from 'next/link';
 
-export const CustomerListResults = ({ customers, ...rest }) => {
+export const AccountTable = ({ customers, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
@@ -70,14 +70,17 @@ export const CustomerListResults = ({ customers, ...rest }) => {
             <TableHead>
               <TableRow>
                 <TableCell>
-                  ชื่อ
+                  บัญชี
                 </TableCell>
                 <TableCell>
-                  อีเมล
+                  ตำแหน่ง
                 </TableCell>
                 <TableCell>
-                  เบอร์โทร
+                  สถานะ
                 </TableCell>
+                {/* <TableCell>
+                  Registration date
+                </TableCell> */}
                 <TableCell>
                   ปุ่ม
                 </TableCell>
@@ -97,12 +100,6 @@ export const CustomerListResults = ({ customers, ...rest }) => {
                         display: 'flex'
                       }}
                     >
-                      {/* <Avatar
-                        src={customer.avatarUrl}
-                        sx={{ mr: 2 }}
-                      >
-                        {getInitials(customer.name)}
-                      </Avatar> */}
                       <Typography
                         color="textPrimary"
                         variant="body1"
@@ -115,15 +112,15 @@ export const CustomerListResults = ({ customers, ...rest }) => {
                     {customer.email}
                   </TableCell>
                   <TableCell>
-                    {customer.phone}
+                    {`${customer.address.city}, ${customer.address.state}, ${customer.address.country}`}
                   </TableCell>
                   <TableCell>
                     <NextLink
-                      href={'/customers/add'}
+                    href={'/account/add'}
                     >
-                      <EditIcon className='cursor-pointer'/>
+                    <EditIcon className='cursor-pointer' />
                     </NextLink>
-                    <DeleteForeverIcon className='cursor-pointer'/>
+                    <DeleteForeverIcon  className='cursor-pointer'/>
                   </TableCell>
                 </TableRow>
               ))}
@@ -144,6 +141,6 @@ export const CustomerListResults = ({ customers, ...rest }) => {
   );
 };
 
-CustomerListResults.propTypes = {
+AccountTable.propTypes = {
   customers: PropTypes.array.isRequired
 };

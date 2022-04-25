@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import * as React from 'react';
 import {
   Box,
   Button,
@@ -6,27 +6,28 @@ import {
   CardContent,
   TextField,
   InputAdornment,
-  SvgIcon,
-  Typography
+  SvgIcon, Typography
 } from '@mui/material';
-import { Download as DownloadIcon } from '../../icons/download';
 import { Search as SearchIcon } from '../../icons/search';
-import { Upload as UploadIcon } from '../../icons/upload';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
-import NextLink from 'next/link'
+import NextLink from 'next/link';
 
-export const ProductListToolbar = (props) => {
-  const [model, setModel] = useState('');
-  const [type, setType] = useState('')
+export const AccountHeader = (props) => {
+  const [role, setRole] = React.useState('');
+  const [Department, setDepartment] = React.useState('')
+  const [status, setStatus] = React.useState('')
   const handleChange = (event) => {
-    setModel(event.target.value);
+    setRole(event.target.value);
   };
-  const typeChange = (event) => {
-    setType(event.target.value)
+  const DepartmentChange = (event) => {
+    setDepartment(event.target.value)
+  }
+  const StatusChange = (event) => {
+    setStatus(event.target.value)
   }
   return (
     <Box {...props}>
@@ -43,34 +44,22 @@ export const ProductListToolbar = (props) => {
           sx={{ m: 1 }}
           variant="h4"
         >
-          สินค้า
+          ผู้ใช้ระบบ
         </Typography>
         <Box sx={{ m: 1 }}>
-          <Button
-            startIcon={(<UploadIcon fontSize="small" />)}
-            sx={{ mr: 1 }}
-          >
-            Import
-          </Button>
-          <Button
-            startIcon={(<DownloadIcon fontSize="small" />)}
-            sx={{ mr: 1 }}
-          >
-            Export
-          </Button>
           <NextLink
-          href={'/products/add'}
+          href={'/account/add'}
           >
-          <Button
-            color="primary"
-            variant="contained"
-          >
-            เพิ่มสินค้า
-          </Button>
-          </NextLink>
+            <Button
+              color="primary"
+              variant="contained"
+            >
+              เพิ่มบัญชี
+            </Button>
+            </NextLink>
         </Box>
       </Box>
-      <Box sx={{ mt: 3 }}>
+      <Box sx={{ mt: 1 }}>
         <Card>
           <CardContent>
             <Grid container spacing={2}>
@@ -81,26 +70,26 @@ export const ProductListToolbar = (props) => {
                     startAdornment: (
                       <InputAdornment position="start">
                         <SvgIcon
-                          fontSize="small"
                           color="action"
+                          fontSize="small"
                         >
                           <SearchIcon />
                         </SvgIcon>
                       </InputAdornment>
                     )
                   }}
-                  placeholder="ชื่อสินค้า"
+                  placeholder="Username"
                   variant="outlined"
                 />
               </Grid>
               <Grid item xs={4} md={2}>
                 <FormControl fullWidth sx={{ minWidth: 120 }}>
-                  <InputLabel id="demo-select-small">รุ่น</InputLabel>
+                  <InputLabel id="demo-select-small">ตำแหน่ง</InputLabel>
                   <Select
                     labelId="demo-select-small"
                     id="demo-select-small"
-                    value={model}
-                    label="Model"
+                    value={role}
+                    label="Role"
                     onChange={handleChange}
                   >
                     <MenuItem value="">
@@ -115,34 +104,36 @@ export const ProductListToolbar = (props) => {
               </Grid>
               <Grid item xs={4} md={2}>
                 <FormControl fullWidth sx={{ minWidth: 120 }}>
-                  <InputLabel id="demo-select-small">ประเภท</InputLabel>
+                  <InputLabel id="demo-simple-select-label">แผนก</InputLabel>
                   <Select
-                    labelId="demo-select-small"
-                    id="demo-select-small"
-                    value={type}
-                    label="type"
-                    onChange={typeChange}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={Department}
+                    label="DepartmentChange"
+                    onChange={DepartmentChange}
                   >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={'MD'}>MD</MenuItem>
-                    <MenuItem value={'BD'}>BD</MenuItem>
-                    <MenuItem value={'HF'}>HF</MenuItem>
-                    <MenuItem value={'SALER'}>Saler</MenuItem>
+                    <MenuItem value={10}>Saler</MenuItem>
+                    <MenuItem value={20}>Head</MenuItem>
+                    <MenuItem value={30}>Support</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
               <Grid item xs={4} md={2}>
-                <FormControl fullWidth>
-                  <TextField
-                    id="outlined-number"
-                    label="งบประมาณ"
-                    type="number"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
+                <FormControl fullWidth sx={{ minWidth: 120 }}>
+                  <InputLabel id="demo-select-small">สถานะ</InputLabel>
+                  <Select
+                    labelId="demo-select-small"
+                    id="demo-select-small"
+                    value={status}
+                    label="Status"
+                    onChange={StatusChange}
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={'on'}>เปิด</MenuItem>
+                    <MenuItem value={'off'}>ปิด</MenuItem>
+                  </Select>
                 </FormControl>
               </Grid>
             </Grid>
@@ -150,6 +141,5 @@ export const ProductListToolbar = (props) => {
         </Card>
       </Box>
     </Box>
-  );
-
+  )
 }

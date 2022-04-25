@@ -15,9 +15,10 @@ import {
 } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
-import NextLink from 'next/link'
+import NextLink from 'next/link';
+import { CompareArrows } from '@mui/icons-material';
 
-export const CustomerListResults = ({ customers, ...rest }) => {
+export const ReportTable = ({ reports, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
@@ -70,25 +71,31 @@ export const CustomerListResults = ({ customers, ...rest }) => {
             <TableHead>
               <TableRow>
                 <TableCell>
-                  ชื่อ
+                  หมายเลขรายการ
                 </TableCell>
                 <TableCell>
-                  อีเมล
+                  ของ
                 </TableCell>
                 <TableCell>
-                  เบอร์โทร
+                  ราคา
                 </TableCell>
+                <TableCell>
+                  แก้ไข(ครั้ง)
+                </TableCell>
+                {/* <TableCell>
+                  Registration date
+                </TableCell> */}
                 <TableCell>
                   ปุ่ม
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {customers.slice(0, limit).map((customer) => (
+              {reports.slice(0, limit).map((report, index) => (
                 <TableRow
                   hover
-                  key={customer.id}
-                  selected={selectedCustomerIds.indexOf(customer.id) !== -1}
+                  key={report.id}
+                  selected={selectedCustomerIds.indexOf(report.id) !== -1}
                 >
                   <TableCell>
                     <Box
@@ -98,7 +105,7 @@ export const CustomerListResults = ({ customers, ...rest }) => {
                       }}
                     >
                       {/* <Avatar
-                        src={customer.avatarUrl}
+                        src={report.avatarUrl}
                         sx={{ mr: 2 }}
                       >
                         {getInitials(customer.name)}
@@ -107,19 +114,30 @@ export const CustomerListResults = ({ customers, ...rest }) => {
                         color="textPrimary"
                         variant="body1"
                       >
-                        {customer.name}
+                        {report.id}
                       </Typography>
                     </Box>
                   </TableCell>
                   <TableCell>
-                    {customer.email}
+                    {report.customer}
                   </TableCell>
                   <TableCell>
-                    {customer.phone}
+                    {`${report.price}`}
                   </TableCell>
                   <TableCell>
+                    {index}
+                  </TableCell>
+                  {/* <TableCell>
+                    {format(customer.createdAt, 'dd/MM/yyyy')}
+                  </TableCell> */}
+                  <TableCell>
+                    <a target='_blank'
+                      href='/reports/compare/1'
+                    >
+                      <CompareArrows />
+                    </a>
                     <NextLink
-                      href={'/customers/add'}
+                      href={'/reports/add'}
                     >
                       <EditIcon className='cursor-pointer'/>
                     </NextLink>
@@ -133,7 +151,7 @@ export const CustomerListResults = ({ customers, ...rest }) => {
       </PerfectScrollbar>
       <TablePagination
         component="div"
-        count={customers.length}
+        count={reports.length}
         onPageChange={handlePageChange}
         onRowsPerPageChange={handleLimitChange}
         page={page}
@@ -144,6 +162,6 @@ export const CustomerListResults = ({ customers, ...rest }) => {
   );
 };
 
-CustomerListResults.propTypes = {
-  customers: PropTypes.array.isRequired
+ReportTable.propTypes = {
+  reports: PropTypes.array.isRequired
 };

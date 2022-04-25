@@ -1,15 +1,16 @@
 import Head from 'next/head';
 import { Box, Container } from '@mui/material';
-import { CustomerListResults } from '../components/customer/customer-list-results';
-import { CustomerListToolbar } from '../components/customer/customer-list-toolbar';
+import { CarsHead } from '../components/cars/CarsHead';
+import { CarsTable } from '../components/cars/CarsTable';
 import { DashboardLayout } from '../components/dashboard-layout';
 import { customers } from '../__mocks__/customers';
+import { cars } from '../__mocks__/cars'
 
 const Customers = () => (
   <>
     <Head>
       <title>
-        ลูกค้า
+        รถ | Material Kit
       </title>
     </Head>
     <Box
@@ -20,9 +21,9 @@ const Customers = () => (
       }}
     >
       <Container maxWidth={false}>
-        <CustomerListToolbar />
+        <CarsHead />
         <Box sx={{ mt: 3 }}>
-          <CustomerListResults customers={customers} />
+          <CarsTable customers={customers} cars={cars} />
         </Box>
       </Container>
     </Box>
